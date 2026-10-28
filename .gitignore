@@ -8,6 +8,6 @@ part1/part1
 .*.cmd
 modules.order
 Module.symvers
-tests/**/consumer
-tests/**/producer
-tests/**/test-syscalls
+part3/tests/**/consumer
+part3/tests/**/producer
+part3/tests/**/test-syscalls
