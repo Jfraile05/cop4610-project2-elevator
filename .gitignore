@@ -1,0 +1,13 @@
+part1/empty
+part1/part1
+*.o
+*.ko
+*.mod
+*.mod.c
+*.cmd
+.*.cmd
+modules.order
+Module.symvers
+tests/**/consumer
+tests/**/producer
+tests/**/test-syscalls
