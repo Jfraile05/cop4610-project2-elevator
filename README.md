@@ -259,6 +259,20 @@ The Chihuahua boards first; the Pug never boards ahead of it.
   also failed when FIFO was deliberately broken, so it detects violations.
 - The patched `syscalls.c`, `elevator.ko`, `my_timer.ko`, and `syscheck.ko` compile against
   an unmodified Linux 6.16.12 tree with the patch applied.
+- The current code was then run end to end on the course VM, on Linux 6.16.12 built from
+  the current `syscalls.c` (`elevator_stub_sem` is present in `/proc/kallsyms`). A fresh
+  clone of this repository built with no warnings. Results:
+  - Part 1: `part1.trace` has 36 lines and `empty.trace` has 31, so 5 more.
+  - Part 2: `my_timer` loaded, `/proc/timer` was read twice, and it unloaded.
+  - System calls: `syscheck` and `./test-syscalls` passed, and `syscheck` was removed
+    before the elevator was loaded.
+  - Elevator: `./fifo` and the controlled FIFO check passed, then a 3-minute series of
+    `./producer 20` runs. Load reached 50 lbs and 5 pets but never went over either
+    limit, and both UP and DOWN were seen.
+  - Stop: `./consumer --stop` with riders aboard delivered them, and the state reached
+    `OFFLINE` after about 11 seconds. `rmmod elevator` removed `/proc/elevator`.
+  - `dmesg`: the only new lines were two notices from loading the out-of-tree `my_timer`
+    module.
 
 ## Known Limitations
 
@@ -269,9 +283,9 @@ The Chihuahua boards first; the Pug never boards ahead of it.
 
 ## Bugs
 
-- No known functional bugs at the time of writing. The newest scheduler and syscall
-  changes were verified by compiling and by a simulation of the scheduler; they must still
-  be exercised on the VM kernel (see Testing).
+- No known functional bugs at the time of writing. Not exercised on the VM: the
+  `elevator_stub_sem` unload guard while a system call races with `rmmod`, and the
+  one-floor-per-move rule, which was checked only in the scheduler simulation.
 - The provided `producer` can request floor 6, which is rejected by design.
 
 ## Considerations
