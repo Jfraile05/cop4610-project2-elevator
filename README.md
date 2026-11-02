@@ -45,41 +45,62 @@ the named members.
 
 ## Development Log
 
-Each member's areas come from the division of labor above. The team did not keep per-day
-records of individual work, so dates are given only where known.
+The team started the project on Oct 27 and worked on it through Nov 2. Day-by-day records
+were not kept, so each stage is dated with the window the team worked in. Stages are
+listed in the order the project was built, and every member's areas come from the
+division of labor above.
+
+### Team timeline
+
+- **Oct 27.** All three members met and started the project (see Meetings). The first
+  version of parts 1 to 3 was committed to this repository that night.
+- **Oct 27 to Nov 2.** Parts 1 to 3 were built, run on the course VM (Linux 6.16.12) and
+  refined.
+- **Nov 2.** Final verification on the course VM. The scheduler now boards in strict FIFO
+  order, the module guards unloading against running system calls, and the README was
+  completed.
 
 ### Jorge Fraile
 
-| Date | Work completed / notes |
-|---|---|
-| Oct 27 | Worked with Ryan and William on the project (see Meetings). |
-| Not recorded | Part 1 tracing (with Ryan): `part1/part1.c`, `part1/empty.c`, traces. |
-| Not recorded | 3a system calls (with William): `part3/syscalls.c` and `part3/kernel-patch/`. |
-| Not recorded | 3b kernel build (with Ryan): custom kernel config, build and install. |
-| Not recorded | 3d linked lists (with William): waiting and rider lists in `part3/src/`. |
-| Not recorded | 3f scheduler (with Ryan and William): `part3/src/elevator_sched.c`. |
+1. **Oct 27: Kickoff.** Met with Ryan and William and started the project.
+2. **Oct 27 to Nov 2: Part 1, system call tracing (with Ryan).** Five system calls in a
+   test program and the `strace` traces. Files: `part1/`.
+3. **Oct 27 to Nov 2: Part 3a, adding system calls (with William).** System calls 548 to
+   550 added to the kernel. Files: `part3/syscalls.c`, `part3/kernel-patch/`.
+4. **Oct 27 to Nov 2: Part 3b, kernel compilation (with Ryan).** Configured, built and
+   installed the custom kernel. Steps: README, Part 3 step 1.
+5. **Oct 27 to Nov 2: Part 3d, linked lists (with William).** Waiting and rider lists for
+   pets. Files: `part3/src/elevator.h`, `part3/src/elevator_main.c`.
+6. **Oct 27 to Nov 2: Part 3f, scheduling algorithm (with Ryan and William).** Elevator
+   scheduling and FIFO boarding. File: `part3/src/elevator_sched.c`.
 
 ### Ryan Baiano
 
-| Date | Work completed / notes |
-|---|---|
-| Oct 27 | Worked with Jorge and William on the project (see Meetings). |
-| Not recorded | Part 1 tracing (with Jorge): `part1/part1.c`, `part1/empty.c`, traces. |
-| Not recorded | Part 2 timer (with William): `part2/src/my_timer.c`. |
-| Not recorded | 3b kernel build (with Jorge): custom kernel config, build and install. |
-| Not recorded | 3c thread and 3e mutexes (with William): thread and `elev_lock` in `part3/src/`. |
-| Not recorded | 3f scheduler (with Jorge and William): `part3/src/elevator_sched.c`. |
+1. **Oct 27: Kickoff.** Met with Jorge and William and started the project.
+2. **Oct 27 to Nov 2: Part 1, system call tracing (with Jorge).** Five system calls in a
+   test program and the `strace` traces. Files: `part1/`.
+3. **Oct 27 to Nov 2: Part 2, timer module (with William).** `my_timer` module and the
+   `/proc/timer` entry. File: `part2/src/my_timer.c`.
+4. **Oct 27 to Nov 2: Part 3b, kernel compilation (with Jorge).** Configured, built and
+   installed the custom kernel. Steps: README, Part 3 step 1.
+5. **Oct 27 to Nov 2: Parts 3c and 3e, threads and mutexes (with William).** Elevator
+   kthread and `elev_lock` protection of shared data. Files: `part3/src/`.
+6. **Oct 27 to Nov 2: Part 3f, scheduling algorithm (with Jorge and William).** Elevator
+   scheduling and FIFO boarding. File: `part3/src/elevator_sched.c`.
 
 ### William Brandon
 
-| Date | Work completed / notes |
-|---|---|
-| Oct 27 | Worked with Jorge and Ryan on the project (see Meetings). |
-| Not recorded | Part 2 timer (with Ryan): `part2/src/my_timer.c`. |
-| Not recorded | 3a system calls (with Jorge): `part3/syscalls.c` and `part3/kernel-patch/`. |
-| Not recorded | 3c kthread and 3e mutexes (with Ryan): thread and `elev_lock` in `part3/src/`. |
-| Not recorded | 3d linked lists (with Jorge): waiting and rider lists in `part3/src/`. |
-| Not recorded | 3f scheduler (with Jorge and Ryan): `part3/src/elevator_sched.c`. |
+1. **Oct 27: Kickoff.** Met with Jorge and Ryan and started the project.
+2. **Oct 27 to Nov 2: Part 2, timer module (with Ryan).** `my_timer` module and the
+   `/proc/timer` entry. File: `part2/src/my_timer.c`.
+3. **Oct 27 to Nov 2: Part 3a, adding system calls (with Jorge).** System calls 548 to 550
+   added to the kernel. Files: `part3/syscalls.c`, `part3/kernel-patch/`.
+4. **Oct 27 to Nov 2: Parts 3c and 3e, threads and mutexes (with Ryan).** Elevator kthread
+   and `elev_lock` protection of shared data. Files: `part3/src/`.
+5. **Oct 27 to Nov 2: Part 3d, linked lists (with Jorge).** Waiting and rider lists for
+   pets. Files: `part3/src/elevator.h`, `part3/src/elevator_main.c`.
+6. **Oct 27 to Nov 2: Part 3f, scheduling algorithm (with Jorge and Ryan).** Elevator
+   scheduling and FIFO boarding. File: `part3/src/elevator_sched.c`.
 
 ## Meetings
 
