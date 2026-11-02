@@ -54,62 +54,85 @@ division of labor above.
 
 **Oct 27** - All three members met and started the project (see Meetings). The first version of parts 1 to 3 was committed to this repository that night.
 
-**Oct 27 - Nov 2** - Parts 1 to 3 were built, run on the course VM (Linux 6.16.12) and refined 
+**Oct 27 - Nov 1** - Parts 1 to 3 were built, run on the course VM and refined 
 
 **Nov 2** - Final verification on the course VM. The scheduler now boards in strict FIFO order, the module guards unloading against running system calls, and the README was completed.
 
 ### Jorge Fraile
 
 1. **Oct 27: Kickoff.** Met with Ryan and William and started the project.
-2. **Oct 27 to Nov 2: Part 1, system call tracing (with Ryan).** Five system calls in a
+2. **Oct 27: Part 1, system call tracing (with Ryan).** Five system calls in a
    test program and the `strace` traces. Files: `part1/`.
-3. **Oct 27 to Nov 2: Part 3a, adding system calls (with William).** System calls 548 to
+3. **Oct 29: Part 3a, adding system calls (with William).** System calls 548 to
    550 added to the kernel. Files: `part3/syscalls.c`, `part3/kernel-patch/`.
-4. **Oct 27 to Nov 2: Part 3b, kernel compilation (with Ryan).** Configured, built and
+4. **Oct 30: Part 3b, kernel compilation (with Ryan).** Configured, built and
    installed the custom kernel. Steps: README, Part 3 step 1.
-5. **Oct 27 to Nov 2: Part 3d, linked lists (with William).** Waiting and rider lists for
+5. **Nov 1: Part 3d, linked lists (with William).** Waiting and rider lists for
    pets. Files: `part3/src/elevator.h`, `part3/src/elevator_main.c`.
-6. **Oct 27 to Nov 2: Part 3f, scheduling algorithm (with Ryan and William).** Elevator
+6. **Nov 2: Part 3f, scheduling algorithm (with Ryan and William).** Elevator
    scheduling and FIFO boarding. File: `part3/src/elevator_sched.c`.
 
 ### Ryan Baiano
 
 1. **Oct 27: Kickoff.** Met with Jorge and William and started the project.
-2. **Oct 27 to Nov 2: Part 1, system call tracing (with Jorge).** Five system calls in a
+2. **Oct 27: Part 1, system call tracing (with Jorge).** 5 system calls in a
    test program and the `strace` traces. Files: `part1/`.
-3. **Oct 27 to Nov 2: Part 2, timer module (with William).** `my_timer` module and the
+3. **Oct 27: Part 2, timer module (with William).** `my_timer` module and the
    `/proc/timer` entry. File: `part2/src/my_timer.c`.
-4. **Oct 27 to Nov 2: Part 3b, kernel compilation (with Jorge).** Configured, built and
+4. **Oct 30: Part 3b, kernel compilation (with Jorge).** Configured, built and
    installed the custom kernel. Steps: README, Part 3 step 1.
-5. **Oct 27 to Nov 2: Parts 3c and 3e, threads and mutexes (with William).** Elevator
+5. **Nov 1: Parts 3c and 3e, threads and mutexes (with William).** Elevator
    kthread and `elev_lock` protection of shared data. Files: `part3/src/`.
-6. **Oct 27 to Nov 2: Part 3f, scheduling algorithm (with Jorge and William).** Elevator
+6. **Nov 2: Part 3f, scheduling algorithm (with Jorge and William).** Elevator
    scheduling and FIFO boarding. File: `part3/src/elevator_sched.c`.
 
 ### William Brandon
 
 1. **Oct 27: Kickoff.** Met with Jorge and Ryan and started the project.
-2. **Oct 27 to Nov 2: Part 2, timer module (with Ryan).** `my_timer` module and the
+2. **Oct 27: Part 2, timer module (with Ryan).** `my_timer` module and the
    `/proc/timer` entry. File: `part2/src/my_timer.c`.
-3. **Oct 27 to Nov 2: Part 3a, adding system calls (with Jorge).** System calls 548 to 550
+3. **Oct 29: Part 3a, adding system calls (with Jorge).** System calls 548 to 550
    added to the kernel. Files: `part3/syscalls.c`, `part3/kernel-patch/`.
 4. **Oct 27 to Nov 2: Parts 3c and 3e, threads and mutexes (with Ryan).** Elevator kthread
    and `elev_lock` protection of shared data. Files: `part3/src/`.
 5. **Oct 27 to Nov 2: Part 3d, linked lists (with Jorge).** Waiting and rider lists for
    pets. Files: `part3/src/elevator.h`, `part3/src/elevator_main.c`.
-6. **Oct 27 to Nov 2: Part 3f, scheduling algorithm (with Jorge and Ryan).** Elevator
+6. **Nov 2: Part 3f, scheduling algorithm (with Jorge and Ryan).** Elevator
    scheduling and FIFO boarding. File: `part3/src/elevator_sched.c`.
 
 ## Meetings
 
 ### Oct 27
-
 - **Attendees:** Jorge Fraile, Ryan Baiano, William Brandon.
 - **Topics discussed:** The team worked together on all parts: system call tracing, the
   timer module, adding system calls, building the kernel, the elevator thread, linked
   lists, mutexes and the scheduling algorithm.
-- **Outcomes:** Each member took the areas listed in the division of labor. By the end of
-  the day the first version of parts 1 to 3 was committed to this repository.
+- **Outcomes:** Established all individual responsibilities and did parts 1 and 2
+
+### Oct 29
+
+- **Attendees:** Jorge Fraile, William Brandon.
+- **Topics discussed:** Jorge and William worked on Part 3a, adding the three elevator system calls (548–550) to the Linux kernel. They discussed the necessary changes to the system call table and kernel source files.
+- **Outcomes:** The three system calls were added to the kernel source, preparing it for compilation.
+
+### Oct 30
+
+- **Attendees:** Jorge Fraile, Ryan Baiano.
+- **Topics discussed:** Jorge and Ryan worked on Part 3b, configuring and compiling the custom Linux kernel with the newly added system calls. They reviewed the kernel build and installation process.
+- **Outcomes:** The custom kernel was successfully compiled and installed.
+
+### Nov 1
+
+- **Attendees:** Jorge Fraile, Ryan Baiano, William Brandon.
+- **Topics discussed:** The team worked on the elevator module's core functionality. Jorge and William implemented linked lists to manage waiting pets and elevator riders. Ryan and William worked on the elevator kernel thread and mutex synchronization to protect shared data.
+- **Outcomes:** The elevator's data structures, kernel thread, and synchronization mechanisms were implemented in preparation for the scheduling algorithm.
+
+### Nov 2
+
+- **Attendees:** Jorge Fraile, Ryan Baiano, William Brandon.
+- **Topics discussed:** All three members worked on the elevator scheduling algorithm, including FIFO boarding, elevator movement, and processing pet requests. The team reviewed the integration of the system calls, kernel thread, linked lists, and mutexes.
+- **Outcomes:** The scheduling algorithm was finalized, and the team tested the elevator's functionality, verified its behavior, and prepared the repository for submission.
+
 
 ## File Listing
 
