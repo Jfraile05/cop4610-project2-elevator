@@ -11,7 +11,26 @@ module, and a pet elevator implemented with three new system calls and a kernel 
 
 ## Division of Labor
 
-Each assignment below was performed by the named members.
+### Original plan
+
+This is the division of labor written before the work began. It was marked as subject to
+discussion and adjustment based on the team's agreement and individual expertise.
+
+| Part | Team members |
+|---|---|
+| 1: System call tracing | Jorge Fraile, Ryan Baiano |
+| 2: Timer kernel module | Ryan Baiano, William Brandon |
+| 3a: Adding system calls | Jorge Fraile, William Brandon |
+| 3b: Kernel compilation | Jorge Fraile, Ryan Baiano |
+| 3c: Threads | Ryan Baiano, William Brandon |
+| 3d: Linked list | Jorge Fraile, William Brandon |
+| 3e: Mutexes | Ryan Baiano, William Brandon |
+| 3f: Scheduling algorithm | Jorge Fraile, Ryan Baiano, William Brandon |
+
+### Final division of labor
+
+The final division is the same as the original plan. Each assignment below was performed by
+the named members.
 
 | Part | Responsibilities | Team members |
 |---|---|---|
