@@ -104,11 +104,14 @@ division of labor above.
 
 ## Meetings
 
-| Date | Attendees | Topics discussed | Outcomes / decisions |
-|---|---|---|---|
-| Oct 27 | Jorge, Ryan, William | Worked together on all parts | Not recorded |
+### Oct 27
 
-No other meetings, and no locations or times, were recorded.
+- **Attendees:** Jorge Fraile, Ryan Baiano, William Brandon.
+- **Topics discussed:** The team worked together on all parts: system call tracing, the
+  timer module, adding system calls, building the kernel, the elevator thread, linked
+  lists, mutexes and the scheduling algorithm.
+- **Outcomes:** Each member took the areas listed in the division of labor. By the end of
+  the day the first version of parts 1 to 3 was committed to this repository.
 
 ## File Listing
 
