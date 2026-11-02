@@ -10,6 +10,8 @@
 #include <linux/kthread.h>
 #include <linux/slab.h>
 #include <linux/err.h>
+#include <linux/rwsem.h>
+#include <linux/wait.h>
 
 #include "elevator.h"
 
@@ -20,6 +22,12 @@ MODULE_DESCRIPTION("Pet elevator kernel module");
 extern int (*STUB_start_elevator)(void);
 extern int (*STUB_issue_request)(int, int, int);
 extern int (*STUB_stop_elevator)(void);
+/*
+ * Weak: defined by the patched syscalls.c. If the installed kernel was built
+ * from an older syscalls.c without it, the module still loads, but unload is
+ * then not synchronized with in-flight system calls.
+ */
+extern struct rw_semaphore elevator_stub_sem __attribute__((weak));
 
 struct elevator elev;
 DEFINE_MUTEX(elev_lock);
@@ -82,10 +90,25 @@ static int stop_elevator(void)
 	return ret;
 }
 
+/* Point the kernel's system-call hooks at the given functions (or NULL). */
+static void set_hooks(int (*start)(void), int (*issue)(int, int, int), int (*stop)(void))
+{
+	bool locked = &elevator_stub_sem != NULL;
+
+	if (locked)
+		down_write(&elevator_stub_sem);
+	STUB_start_elevator = start;
+	STUB_issue_request = issue;
+	STUB_stop_elevator = stop;
+	if (locked)
+		up_write(&elevator_stub_sem);
+}
+
 static int __init elevator_init(void)
 {
 	int f, ret;
 
+	mutex_init(&elev_lock);
 	elev.state = OFFLINE;
 	elev.dir = DIR_UP;
 	elev.floor = MIN_FLOOR;
@@ -94,29 +117,31 @@ static int __init elevator_init(void)
 		INIT_LIST_HEAD(&elev.waiting[f]);
 
 	ret = elevator_proc_init();
-	if (ret)
+	if (ret) {
+		mutex_destroy(&elev_lock);
 		return ret;
+	}
 
 	elevator_thread = kthread_run(elevator_thread_fn, NULL, "elevator");
 	if (IS_ERR(elevator_thread)) {
 		ret = PTR_ERR(elevator_thread);
+		elevator_thread = NULL;
 		elevator_proc_exit();
+		mutex_destroy(&elev_lock);
 		return ret;
 	}
 
-	STUB_start_elevator = start_elevator;
-	STUB_issue_request = issue_request;
-	STUB_stop_elevator = stop_elevator;
+	set_hooks(start_elevator, issue_request, stop_elevator);
 	return 0;
 }
 
 static void __exit elevator_exit(void)
 {
-	STUB_start_elevator = NULL;
-	STUB_issue_request = NULL;
-	STUB_stop_elevator = NULL;
+	/* Wait for active syscall dispatches before unloading this module's text. */
+	set_hooks(NULL, NULL, NULL);
 
-	kthread_stop(elevator_thread);
+	if (elevator_thread)
+		kthread_stop(elevator_thread);
 	elevator_proc_exit();
 	elevator_free_all_pets();
 	mutex_destroy(&elev_lock);

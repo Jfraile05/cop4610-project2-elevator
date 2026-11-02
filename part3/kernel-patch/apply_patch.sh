@@ -37,14 +37,17 @@ fi
 # Kernels 6.x list top-level directories in Kbuild; older ones use core-y in Makefile.
 if [ -f "$KDIR/Kbuild" ] && grep -q '^obj-y.*+= kernel/' "$KDIR/Kbuild"; then
 	if ! grep -q 'syscalls/' "$KDIR/Kbuild"; then
-		sed -i 's|^\(obj-y[[:space:]]*+= kernel/\)$|\1\nobj-y\t\t\t+= syscalls/|' "$KDIR/Kbuild"
+		sed -i 's|^\(obj-y[[:space:]]*+= kernel/\)$|\1\nobj-y\t\t\t+= syscalls/|' \
+			"$KDIR/Kbuild"
 	fi
-	grep -q 'syscalls/' "$KDIR/Kbuild" || { echo "Add 'obj-y += syscalls/' to $KDIR/Kbuild by hand"; exit 1; }
+	grep -q 'syscalls/' "$KDIR/Kbuild" || {
+		echo "Add 'obj-y += syscalls/' to $KDIR/Kbuild by hand"; exit 1; }
 else
 	if ! grep -q 'syscalls/' "$KDIR/Makefile"; then
 		sed -i 's|^\(core-y[[:space:]]*+= kernel/.*\)$|\1 syscalls/|' "$KDIR/Makefile"
 	fi
-	grep -q 'syscalls/' "$KDIR/Makefile" || { echo "Add syscalls/ to core-y in $KDIR/Makefile by hand"; exit 1; }
+	grep -q 'syscalls/' "$KDIR/Makefile" || {
+		echo "Add syscalls/ to core-y in $KDIR/Makefile by hand"; exit 1; }
 fi
 
 echo "Patched $KDIR. Next: ./config_certs.sh $KDIR, then build (see README)."

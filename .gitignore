@@ -11,3 +11,4 @@ Module.symvers
 part3/tests/**/consumer
 part3/tests/**/producer
 part3/tests/**/test-syscalls
+part3/tests/**/fifo

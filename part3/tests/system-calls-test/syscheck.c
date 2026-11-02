@@ -7,9 +7,12 @@ MODULE_AUTHOR("cop4610t");
 MODULE_DESCRIPTION("A simple Linux kernel module to check systemcalls.");
 MODULE_VERSION("0.1");
 
-int start_elevator(void);                                                           // starts the elevator to pick up and drop off passengers
-int issue_request(int start_floor, int destination_floor, int type);                // add passengers requests to specific floors
-int stop_elevator(void);                                                            // stops the elevator
+/* starts the elevator to pick up and drop off passengers */
+int start_elevator(void);
+/* add passengers requests to specific floors */
+int issue_request(int start_floor, int destination_floor, int type);
+/* stops the elevator */
+int stop_elevator(void);
 
 extern int (*STUB_start_elevator)(void);
 extern int (*STUB_issue_request)(int,int,int);

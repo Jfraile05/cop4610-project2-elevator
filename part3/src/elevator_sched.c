@@ -5,9 +5,8 @@
  * The elevator keeps sweeping in its current direction while there is
  * anything ahead of it (a rider's destination or, if there is room, a
  * waiting pet). When nothing is ahead it reverses. At a stop riders get
- * off first, then waiting pets board in FIFO order, but only pets heading
- * the same way the elevator will travel. Boarding on a floor stops at the
- * first eligible pet that does not fit so FIFO order is never violated.
+ * off first, then pets board in strict FIFO order. Boarding stops at the
+ * first pet that does not fit.
  *
  * All helpers below except elevator_thread_fn() require elev_lock held.
  */
@@ -16,11 +15,6 @@
 #include <linux/slab.h>
 
 #include "elevator.h"
-
-static int pet_direction(const struct pet *p)
-{
-	return p->dest > p->start ? DIR_UP : DIR_DOWN;
-}
 
 static bool can_accept_more(void)
 {
@@ -44,20 +38,18 @@ static int count_unloads(void)
 	return n;
 }
 
-/* True if the first waiting pet heading in @dir on this floor can board. */
-static bool board_possible(int dir)
+/* True if the queue head on this floor can board. */
+static bool board_possible(void)
 {
 	struct pet *p;
 
 	if (!elev.accepting)
 		return false;
 
-	list_for_each_entry(p, &elev.waiting[elev.floor], list) {
-		if (pet_direction(p) != dir)
-			continue;
-		return pet_fits(p);
-	}
-	return false;
+	if (list_empty(&elev.waiting[elev.floor]))
+		return false;
+	p = list_first_entry(&elev.waiting[elev.floor], struct pet, list);
+	return pet_fits(p);
 }
 
 /* True if a rider destination or useful pickup lies beyond this floor. */
@@ -82,21 +74,20 @@ static bool has_ahead(int dir)
 /* Direction the elevator will travel when it leaves (or serves) this floor. */
 static int effective_dir(void)
 {
-	if (has_ahead(elev.dir) || board_possible(elev.dir))
+	if (has_ahead(elev.dir) || board_possible())
 		return elev.dir;
 	return -elev.dir;
 }
 
 static bool stop_needed(void)
 {
-	return count_unloads() > 0 || board_possible(effective_dir());
+	return count_unloads() > 0 || board_possible();
 }
 
 /* Unload arriving riders, then board waiting pets in FIFO order. */
 static void service_floor(void)
 {
 	struct pet *p, *tmp;
-	int dir;
 
 	list_for_each_entry_safe(p, tmp, &elev.riders, list) {
 		if (p->dest != elev.floor)
@@ -109,13 +100,10 @@ static void service_floor(void)
 	}
 
 	elev.dir = effective_dir();
-	dir = elev.dir;
 	if (!elev.accepting)
 		return;
 
 	list_for_each_entry_safe(p, tmp, &elev.waiting[elev.floor], list) {
-		if (pet_direction(p) != dir)
-			continue;
 		if (!pet_fits(p))
 			break;
 		list_move_tail(&p->list, &elev.riders);
