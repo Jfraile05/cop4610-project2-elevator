@@ -52,13 +52,11 @@ division of labor above.
 
 ### Team timeline
 
-- **Oct 27.** All three members met and started the project (see Meetings). The first
-  version of parts 1 to 3 was committed to this repository that night.
-- **Oct 27 to Nov 2.** Parts 1 to 3 were built, run on the course VM (Linux 6.16.12) and
-  refined.
-- **Nov 2.** Final verification on the course VM. The scheduler now boards in strict FIFO
-  order, the module guards unloading against running system calls, and the README was
-  completed.
+| Date(s) | Action | 
+|---|---|---|
+| Oct 27 | All three members met and started the project (see Meetings). The first version of parts 1 to 3 was committed to this repository that night. |
+| Oct 27 - Nov 2 | Parts 1 to 3 were built, run on the course VM (Linux 6.16.12) and refined |
+| Nov 2 | Final verification on the course VM. The scheduler now boards in strict FIFO order, the module guards unloading against running system calls, and the README was completed. |
 
 ### Jorge Fraile
 
