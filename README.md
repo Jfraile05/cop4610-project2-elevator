@@ -53,33 +53,33 @@ records of individual work, so dates are given only where known.
 | Date | Work completed / notes |
 |---|---|
 | Oct 27 | Worked with Ryan and William on the project (see Meetings). |
-| Not recorded | Part 1 tracing (with Ryan). |
-| Not recorded | 3a system calls (with William). |
-| Not recorded | 3b kernel build (with Ryan). |
-| Not recorded | 3d linked lists (with William). |
-| Not recorded | 3f scheduler (with Ryan and William). |
+| Not recorded | Part 1 tracing (with Ryan): `part1/part1.c`, `part1/empty.c`, traces. |
+| Not recorded | 3a system calls (with William): `part3/syscalls.c` and `part3/kernel-patch/`. |
+| Not recorded | 3b kernel build (with Ryan): custom kernel config, build and install. |
+| Not recorded | 3d linked lists (with William): waiting and rider lists in `part3/src/`. |
+| Not recorded | 3f scheduler (with Ryan and William): `part3/src/elevator_sched.c`. |
 
 ### Ryan Baiano
 
 | Date | Work completed / notes |
 |---|---|
 | Oct 27 | Worked with Jorge and William on the project (see Meetings). |
-| Not recorded | Part 1 tracing (with Jorge). |
-| Not recorded | Part 2 timer (with William). |
-| Not recorded | 3b kernel build (with Jorge). |
-| Not recorded | 3c kthread and 3e mutexes (with William). |
-| Not recorded | 3f scheduler (with Jorge and William). |
+| Not recorded | Part 1 tracing (with Jorge): `part1/part1.c`, `part1/empty.c`, traces. |
+| Not recorded | Part 2 timer (with William): `part2/src/my_timer.c`. |
+| Not recorded | 3b kernel build (with Jorge): custom kernel config, build and install. |
+| Not recorded | 3c thread and 3e mutexes (with William): thread and `elev_lock` in `part3/src/`. |
+| Not recorded | 3f scheduler (with Jorge and William): `part3/src/elevator_sched.c`. |
 
 ### William Brandon
 
 | Date | Work completed / notes |
 |---|---|
 | Oct 27 | Worked with Jorge and Ryan on the project (see Meetings). |
-| Not recorded | Part 2 timer (with Ryan). |
-| Not recorded | 3a system calls (with Jorge). |
-| Not recorded | 3c kthread and 3e mutexes (with Ryan). |
-| Not recorded | 3d linked lists (with Jorge). |
-| Not recorded | 3f scheduler (with Jorge and Ryan). |
+| Not recorded | Part 2 timer (with Ryan): `part2/src/my_timer.c`. |
+| Not recorded | 3a system calls (with Jorge): `part3/syscalls.c` and `part3/kernel-patch/`. |
+| Not recorded | 3c kthread and 3e mutexes (with Ryan): thread and `elev_lock` in `part3/src/`. |
+| Not recorded | 3d linked lists (with Jorge): waiting and rider lists in `part3/src/`. |
+| Not recorded | 3f scheduler (with Jorge and Ryan): `part3/src/elevator_sched.c`. |
 
 ## Meetings
 
